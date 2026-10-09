@@ -1,0 +1,121 @@
+services:
+  discovery-service:
+    image: abd1230/discovery-server:v2
+    container_name: discovery-service
+    ports:
+      - '8761:8761'
+    expose:
+      - '8761'
+    healthcheck:
+      test: ["CMD","curl","-f","http://localhost:8761/actuator/health"]
+      interval: 10s
+  gateway-server:
+    image: abd1230/gateway-server:v2
+    container_name: gateway-server
+    ports:
+      - '8886:8886'
+    expose:
+      - '8886'
+    healthcheck:
+      test: ["CMD","curl","-f","http://localhost:8886/actuator/health"]
+      interval: 10s
+    environment:
+      - EUREKA_URL=http://discovery-service:8761/eureka/
+      - CONFIG_EV=http://config-service:9999
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+  config-service:
+    image: abd1230/config-service:v2
+    container_name: config-service
+    ports:
+      - '9090:9999'
+    healthcheck:
+      test: ["CMD","curl","-f","http://localhost:9999/actuator/health"]
+      interval: 10s
+    environment:
+      - EUREKA_URL=http://discovery-service:8761/eureka/
+  patient-service:
+    image: abd1230/patient-service:v2
+    container_name: patient-service
+    ports:
+      - '8090:8081'
+    expose:
+      - '8081'
+    healthcheck:
+      test: ["CMD","curl","-f","http://localhost:8081/actuator/health"]
+      interval: 10s
+    environment:
+      - EUREKA_URL=http://discovery-service:8761/eureka/
+      - CONFIG_EV=http://config-service:9999
+    depends_on:
+      gateway-server:
+        condition: service_healthy
+      config-service:
+        condition: service_healthy
+  medicament-service:
+    image: abd1230/medicament-service:v3
+    deploy:
+      replicas: 2
+    ports:
+      - '8077-8091:8082'
+    expose:
+      - '8082'
+    healthcheck:
+      test: [ "CMD","curl","-f","http://localhost:8082/actuator/health" ]
+      interval: 10s
+    environment:
+      - EUREKA_URL=http://discovery-service:8761/eureka/
+      - CONFIG_EV=http://config-service:9999
+    depends_on:
+      gateway-server:
+        condition: service_healthy
+      config-service:
+        condition: service_healthy
+  ordonnance-service:
+    image: abd1230/ordonnance-service:v3
+    container_name: ordonnance-service
+    ports:
+      - '8092:8087'
+    expose:
+      - '8087'
+    healthcheck:
+      test: [ "CMD","curl","-f","http://localhost:8087/actuator/health" ]
+      interval: 10s
+    environment:
+      - EUREKA_URL=http://discovery-service:8761/eureka/
+      - CONFIG_EV=http://config-service:9999
+    depends_on:
+      patient-service:
+        condition: service_healthy
+      medicament-service:
+        condition: service_healthy
+      config-service:
+        condition: service_healthy
+  ordonnance-bot:
+    image: abd1230/ordonnance-bot:v1
+    container_name: ordonnance-bot
+    ports:
+      - '8899:8889'
+    expose:
+      - '8889'
+    environment:
+      - EUREKA_URL=http://discovery-service:8761/eureka/
+      - CONFIG_EV=http://config-service:9999
+      - ORDONNANCE_URL=http://ordonnance-service:8087/mcp
+      - PATIENT_URL=http://patient-service:8081/mcp
+      - MEDICAMENT_URL=http://medicament-service:8082/mcp
+    depends_on:
+      gateway-server:
+        condition: service_healthy
+      config-service:
+        condition: service_healthy
+      ordonnance-service:
+        condition: service_healthy
+  frontend-angulare-service:
+    image: abd1230/frontend-angulare-service:v3
+    container_name: frontend-angulare-service
+    ports:
+      - '4200:80'
+    expose:
+      - '80'
