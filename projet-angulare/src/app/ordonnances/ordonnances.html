@@ -1,0 +1,24 @@
+<div class="p-3">
+  <div class="card">
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>ID</th><th>ordDate</th><th>patientId</th><th>action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let o of ordonnancesA">
+          <td>{{o.id}}</td>
+          <td>{{o.ordDate}}</td>
+          <td>{{o.patientId}}</td>
+          <td><button (click)="details(o.id)">details</button></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+
