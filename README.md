@@ -53,7 +53,8 @@ L'agent utilise Spring AI avec OpenRouter (API compatible OpenAI) et le modèle 
 
 ### Création d'une ordonnance pour un patient
 
-<img width="1919" height="954" alt="image" src="https://github.com/user-attachments/assets/1bd5e13c-caec-47cd-993d-c682e5943f72" />
+<img width="1778" height="884" alt="image" src="https://github.com/user-attachments/assets/95ec2aa9-cf8a-4cef-8761-396882532984" />
+
 
 ## Lancer le projet
 
