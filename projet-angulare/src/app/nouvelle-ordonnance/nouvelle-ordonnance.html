@@ -1,0 +1,87 @@
+<main class="page">
+  <section class="feuille">
+
+    <header class="entete">
+      <h1>Nouvelle ordonnance</h1>
+      <p class="patient">Patient n° {{ idPatient }}</p>
+    </header>
+
+    @if (erreur()) {
+      <div class="alerte" role="alert">{{ erreur() }}</div>
+    }
+
+    <form [formGroup]="ordonnanceForm" (ngSubmit)="valider()" novalidate>
+
+      <div class="champ champ-date">
+        <label for="ordDate">Date de l'ordonnance</label>
+        <input id="ordDate" type="date" formControlName="ordDate">
+        @if (ordonnanceForm.get('ordDate')?.touched && ordonnanceForm.get('ordDate')?.hasError('required')) {
+          <small class="erreur">Choisissez une date.</small>
+        }
+      </div>
+
+      <h2>Médicaments prescrits</h2>
+
+      <div formArrayName="items" class="lignes">
+        @for (ligne of items.controls; track ligne; let i = $index) {
+          <div class="ligne" [formGroupName]="i">
+
+            <div class="champ champ-med">
+              <label [for]="'med-' + i">Médicament</label>
+              <select [id]="'med-' + i" formControlName="medicamentId">
+                <option [ngValue]="null" disabled>Choisir un médicament</option>
+                @for (m of medicaments(); track m.id) {
+                  <option [ngValue]="m.id" [disabled]="dejaChoisi(m.id, i)">
+                    {{ m.nom }} – {{ m.price_unit | number:'1.2-2' }} DH
+                  </option>
+                }
+              </select>
+              @if (medicamentChoisi(i); as med) {
+                <small class="aide">Stock disponible : {{ med.Stock }}</small>
+              } @else if (ligne.get('medicamentId')?.touched) {
+                <small class="erreur">Choisissez un médicament.</small>
+              }
+            </div>
+
+            <div class="champ champ-qte">
+              <label [for]="'qte-' + i">Quantité</label>
+              <input [id]="'qte-' + i" type="number" min="1" formControlName="quantity">
+              @if (ligne.hasError('stockInsuffisant')) {
+                <small class="erreur">Dépasse le stock.</small>
+              } @else if (ligne.get('quantity')?.touched && ligne.get('quantity')?.invalid) {
+                <small class="erreur">Minimum 1.</small>
+              }
+            </div>
+
+            <div class="champ champ-prix">
+              <span class="etiquette">Prix</span>
+              <output class="prix">{{ prixLigne(i) | number:'1.2-2' }} DH</output>
+            </div>
+
+            <button type="button" class="btn-retirer" (click)="supprimerLigne(i)"
+                    [disabled]="items.length === 1" aria-label="Retirer ce médicament">
+              Retirer
+            </button>
+          </div>
+        }
+      </div>
+
+      <button type="button" class="btn-ajouter" (click)="ajouterLigne()">
+        Ajouter un médicament
+      </button>
+
+      <div class="total">
+        <span>Total de l'ordonnance</span>
+        <strong>{{ total | number:'1.2-2' }} DH</strong>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="btn-secondaire" (click)="annuler()">Annuler</button>
+        <button type="submit" class="btn-principal" [disabled]="enCours()">
+          {{ enCours() ? 'Enregistrement…' : "Enregistrer l'ordonnance" }}
+        </button>
+      </div>
+
+    </form>
+  </section>
+</main>

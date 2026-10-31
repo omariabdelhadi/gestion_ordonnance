@@ -1,0 +1,243 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap');
+
+:host {
+  --fond: #e9eeec;
+  --feuille: #ffffff;
+  --encre: #14211f;
+  --encre-douce: #5b6b68;
+  --trait: #d5ddda;
+  --accent: #0b5d51;
+  --accent-fonce: #084a41;
+  --alerte: #b3261e;
+
+  display: block;
+  min-height: 100vh;
+  background: var(--fond);
+  color: var(--encre);
+  font-family: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  line-height: 1.5;
+}
+
+.page {
+  padding: 2.5rem 1rem 4rem;
+}
+
+.feuille {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 2.5rem 2.5rem 2rem;
+  background: var(--feuille);
+  border: 1px solid var(--trait);
+  border-top: 6px solid var(--accent);
+  border-radius: 2px;
+}
+
+.entete h1 {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.patient {
+  margin: 0.25rem 0 2rem;
+  color: var(--encre-douce);
+}
+
+h2 {
+  margin: 2rem 0 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--encre);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.champ {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 0;
+}
+
+label,
+.etiquette {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--encre-douce);
+}
+
+input,
+select {
+  width: 100%;
+  padding: 0.6rem 0.7rem;
+  font: inherit;
+  color: var(--encre);
+  background: #fff;
+  border: 1px solid #b8c4c1;
+  border-radius: 4px;
+}
+
+input:focus-visible,
+select:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.champ-date {
+  max-width: 14rem;
+}
+
+small {
+  font-size: 0.8125rem;
+}
+
+.aide {
+  color: var(--encre-douce);
+}
+
+.erreur {
+  color: var(--alerte);
+}
+
+.alerte {
+  margin-bottom: 1.5rem;
+  padding: 0.75rem 1rem;
+  color: var(--alerte);
+  background: #fdecea;
+  border-left: 4px solid var(--alerte);
+}
+
+.ligne {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 6.5rem 8rem auto;
+  gap: 1rem;
+  align-items: start;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--trait);
+}
+
+.champ-prix {
+  align-items: flex-end;
+}
+
+.prix {
+  padding-top: 0.6rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.btn-retirer {
+  margin-top: 1.55rem;
+  padding: 0.35rem 0.5rem;
+  font: inherit;
+  font-size: 0.875rem;
+  color: var(--alerte);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.btn-retirer:disabled {
+  color: #a9b3b1;
+  cursor: not-allowed;
+  text-decoration: none;
+}
+
+.btn-ajouter {
+  margin-top: 1rem;
+  padding: 0.6rem 1rem;
+  font: inherit;
+  font-weight: 500;
+  color: var(--accent);
+  background: none;
+  border: 1px dashed var(--accent);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-ajouter:hover {
+  background: #eef6f4;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 2px solid var(--encre);
+}
+
+.total strong {
+  font-size: 1.9rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.btn-principal,
+.btn-secondaire {
+  padding: 0.7rem 1.25rem;
+  font: inherit;
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-principal {
+  color: #fff;
+  background: var(--accent);
+  border: 1px solid var(--accent);
+}
+
+.btn-principal:hover:not(:disabled) {
+  background: var(--accent-fonce);
+}
+
+.btn-principal:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.btn-secondaire {
+  color: var(--encre);
+  background: none;
+  border: 1px solid #b8c4c1;
+}
+
+.btn-secondaire:hover {
+  background: #f3f6f5;
+}
+
+@media (max-width: 40rem) {
+  .feuille {
+    padding: 1.5rem 1.1rem;
+  }
+
+  .ligne {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .champ-med,
+  .btn-retirer {
+    grid-column: 1 / -1;
+  }
+
+  .btn-retirer {
+    justify-self: end;
+    margin-top: 0;
+  }
+
+  .actions {
+    flex-direction: column-reverse;
+  }
+}
