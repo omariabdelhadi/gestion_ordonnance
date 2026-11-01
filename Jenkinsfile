@@ -214,25 +214,6 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
-            when {
-                anyOf {
-                    changeset "patient-service/**"
-                    changeset "auth-service/**"
-                    changeset "medicament-service/**"
-                    changeset "ordonnance-service/**"
-                    changeset "ordonnance-bot/**"
-                    changeset "config-service/**"
-                    changeset "discovery-server/**"
-                    changeset "gateway-server/**"
-                    changeset "analytics-service/**"
-                    changeset "projet-angulare/**"
-                }
-            }
-            steps {
-                sh 'docker compose pull'
-                sh 'docker compose up -d'
-            }
-        }
+
     }
 }
