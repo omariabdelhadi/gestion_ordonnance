@@ -14,7 +14,7 @@ pipeline {
                     def tag = "${env.BUILD_NUMBER}"
                     dir('patient-service') {
                         sh 'chmod +x mvnw'
-                        sh './mvnw -B clean package -DskipTests'
+                        sh './mvnw -B clean package'
                         sh "docker build -t ${img}:${tag} -t ${img}:latest ."
                         withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DH_USER', passwordVariable: 'DH_PASS')]) {
                             sh 'echo "$DH_PASS" | docker login -u "$DH_USER" --password-stdin'
@@ -35,7 +35,7 @@ pipeline {
                     def tag = "${env.BUILD_NUMBER}"
                     dir('auth-service') {
                         sh 'chmod +x mvnw'
-                        sh './mvnw -B clean package -DskipTests'
+                        sh './mvnw -B clean package'
                         sh "docker build -t ${img}:${tag} -t ${img}:latest ."
                         withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DH_USER', passwordVariable: 'DH_PASS')]) {
                             sh 'echo "$DH_PASS" | docker login -u "$DH_USER" --password-stdin'
@@ -56,7 +56,7 @@ pipeline {
                     def tag = "${env.BUILD_NUMBER}"
                     dir('medicament-service') {
                         sh 'chmod +x mvnw'
-                        sh './mvnw -B clean package -DskipTests'
+                        sh './mvnw -B clean package'
                         sh "docker build -t ${img}:${tag} -t ${img}:latest ."
                         withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DH_USER', passwordVariable: 'DH_PASS')]) {
                             sh 'echo "$DH_PASS" | docker login -u "$DH_USER" --password-stdin'
@@ -77,7 +77,7 @@ pipeline {
                     def tag = "${env.BUILD_NUMBER}"
                     dir('ordonnance-service') {
                         sh 'chmod +x mvnw'
-                        sh './mvnw -B clean package -DskipTests'
+                        sh './mvnw -B clean package'
                         sh "docker build -t ${img}:${tag} -t ${img}:latest ."
                         withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DH_USER', passwordVariable: 'DH_PASS')]) {
                             sh 'echo "$DH_PASS" | docker login -u "$DH_USER" --password-stdin'
@@ -98,7 +98,7 @@ pipeline {
                     def tag = "${env.BUILD_NUMBER}"
                     dir('ordonnance-bot') {
                         sh 'chmod +x mvnw'
-                        sh './mvnw -B clean package -DskipTests'
+                        sh './mvnw -B clean package'
                         sh "docker build -t ${img}:${tag} -t ${img}:latest ."
                         withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DH_USER', passwordVariable: 'DH_PASS')]) {
                             sh 'echo "$DH_PASS" | docker login -u "$DH_USER" --password-stdin'
@@ -119,7 +119,7 @@ pipeline {
                     def tag = "${env.BUILD_NUMBER}"
                     dir('config-service') {
                         sh 'chmod +x mvnw'
-                        sh './mvnw -B clean package -DskipTests'
+                        sh './mvnw -B clean package'
                         sh "docker build -t ${img}:${tag} -t ${img}:latest ."
                         withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DH_USER', passwordVariable: 'DH_PASS')]) {
                             sh 'echo "$DH_PASS" | docker login -u "$DH_USER" --password-stdin'
@@ -140,7 +140,7 @@ pipeline {
                     def tag = "${env.BUILD_NUMBER}"
                     dir('discovery-server') {
                         sh 'chmod +x mvnw'
-                        sh './mvnw -B clean package -DskipTests'
+                        sh './mvnw -B clean package'
                         sh "docker build -t ${img}:${tag} -t ${img}:latest ."
                         withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DH_USER', passwordVariable: 'DH_PASS')]) {
                             sh 'echo "$DH_PASS" | docker login -u "$DH_USER" --password-stdin'
@@ -161,7 +161,7 @@ pipeline {
                     def tag = "${env.BUILD_NUMBER}"
                     dir('gateway-server') {
                         sh 'chmod +x mvnw'
-                        sh './mvnw -B clean package -DskipTests'
+                        sh './mvnw -B clean package'
                         sh "docker build -t ${img}:${tag} -t ${img}:latest ."
                         withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DH_USER', passwordVariable: 'DH_PASS')]) {
                             sh 'echo "$DH_PASS" | docker login -u "$DH_USER" --password-stdin'
@@ -182,7 +182,7 @@ pipeline {
                     def tag = "${env.BUILD_NUMBER}"
                     dir('analytics-service') {
                         sh 'chmod +x mvnw'
-                        sh './mvnw -B clean package -DskipTests'
+                        sh './mvnw -B clean package'
                         sh "docker build -t ${img}:${tag} -t ${img}:latest ."
                         withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DH_USER', passwordVariable: 'DH_PASS')]) {
                             sh 'echo "$DH_PASS" | docker login -u "$DH_USER" --password-stdin'
