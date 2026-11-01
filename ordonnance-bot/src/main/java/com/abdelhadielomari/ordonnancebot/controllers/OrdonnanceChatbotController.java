@@ -14,7 +14,7 @@ public class OrdonnanceChatbotController {
 
     @Autowired
     private OrdonnanceAIAgent ordonnanceAIAgent;
-    // hy i m the happy man in the world
+    // hy i m the happy man in the world ss
     @GetMapping("/chat")
     public String chat(
             @RequestParam(name="query", defaultValue="Bonjour") String query,

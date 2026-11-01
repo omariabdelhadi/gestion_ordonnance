@@ -21,7 +21,7 @@ import java.util.List;
 @RequestMapping("/analytics")
 @RequiredArgsConstructor
 public class AnalyticsController {
-    // H
+    // Hs
     private final Analyticsservices analyticsservices;
     private final MedicamentConsommationRepository medicamentConsommationRepository;
     private final MedicamentRestClient medicamentRestClient;

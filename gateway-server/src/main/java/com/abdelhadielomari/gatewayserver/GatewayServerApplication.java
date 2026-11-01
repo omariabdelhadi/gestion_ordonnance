@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class GatewayServerApplication {
-    // H
+    // Hs
 
     public static void main(String[] args) {
 

@@ -31,7 +31,7 @@ import java.util.Map;
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthController {
-    // H
+    // Hs
     private final AuthenticationManager authenticationManager;
     private final AppUserRepository appUserRepository;
     private final JwtEncoder jwtEncoder;

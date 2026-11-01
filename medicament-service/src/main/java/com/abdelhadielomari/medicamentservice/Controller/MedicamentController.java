@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class MedicamentController {
+    //s
     @Autowired
     private MedicamentRepository medicamentRepository;
     @Autowired
