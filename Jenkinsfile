@@ -194,5 +194,45 @@ pipeline {
                 }
             }
         }
+
+        stage('Angular App') {
+            when { changeset "projet-angulare/**" }
+            steps {
+                script {
+                    def img = "${DOCKER_REGISTRY}/projet-angulare"
+                    def tag = "${env.BUILD_NUMBER}"
+                    dir('projet-angulare') {
+                        sh "docker build -t ${img}:${tag} -t ${img}:latest ."
+                        withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DH_USER', passwordVariable: 'DH_PASS')]) {
+                            sh 'echo "$DH_PASS" | docker login -u "$DH_USER" --password-stdin'
+                            sh "docker push ${img}:${tag}"
+                            sh "docker push ${img}:latest"
+                            sh 'docker logout || true'
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('Deploy') {
+            when {
+                anyOf {
+                    changeset "patient-service/**"
+                    changeset "auth-service/**"
+                    changeset "medicament-service/**"
+                    changeset "ordonnance-service/**"
+                    changeset "ordonnance-bot/**"
+                    changeset "config-service/**"
+                    changeset "discovery-server/**"
+                    changeset "gateway-server/**"
+                    changeset "analytics-service/**"
+                    changeset "projet-angulare/**"
+                }
+            }
+            steps {
+                sh 'docker compose pull'
+                sh 'docker compose up -d'
+            }
+        }
     }
 }
