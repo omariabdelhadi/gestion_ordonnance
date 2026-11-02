@@ -230,9 +230,9 @@ pipeline {
                 }
             } */
             steps {
-                sh 'docker compose pull'
                 sh 'docker compose down --remove-orphans || true'
-                sh 'docker compose up -d'
+                sh 'docker compose pull'
+                sh 'docker compose up -d --remove-orphans'
             }
         }
     }
