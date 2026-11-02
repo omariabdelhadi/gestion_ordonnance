@@ -83,10 +83,8 @@
 
     medicament-service:
       image: abd1230/medicament-service:latest
-      deploy:
-        replicas: 2
       ports:
-        - '8077-8091:8082'
+        - '8091:8082'
       expose:
         - '8082'
       healthcheck:
@@ -149,7 +147,7 @@
         - EUREKA_URL=http://discovery-service:8761/eureka/
         - CONFIG_EV=http://config-service:9999
         - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
-        - JWT_SECRET=${JWT_SECRET}
+        - JWT_SECRET=${JWT_SECRET:-oaqlezeDkveloppament2026ordonnanceMw}
       depends_on:
         config-service:
           condition: service_healthy
@@ -173,7 +171,7 @@
       environment:
         - EUREKA_URL=http://discovery-service:8761/eureka/
         - CONFIG_EV=http://config-service:9999
-        - JWT_SECRET=${JWT_SECRET}
+        - JWT_SECRET=${JWT_SECRET:-oaqlezeDkveloppament2026ordonnanceMw}
       depends_on:
         config-service:
           condition: service_healthy
