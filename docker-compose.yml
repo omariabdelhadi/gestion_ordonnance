@@ -9,6 +9,9 @@ services:
     healthcheck:
       test: ["CMD","curl","-f","http://localhost:8761/actuator/health"]
       interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 60s
 
   gateway-server:
     image: abd1230/gateway-server:latest
@@ -20,6 +23,9 @@ services:
     healthcheck:
       test: ["CMD","curl","-f","http://localhost:8886/actuator/health"]
       interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 60s
     environment:
       - EUREKA_URL=http://discovery-service:8761/eureka/
       - CONFIG_EV=http://config-service:9999
@@ -35,6 +41,9 @@ services:
     healthcheck:
       test: ["CMD","curl","-f","http://localhost:9999/actuator/health"]
       interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 60s
     environment:
       - EUREKA_URL=http://discovery-service:8761/eureka/
 
@@ -65,6 +74,9 @@ services:
     healthcheck:
       test: ["CMD","curl","-f","http://localhost:8081/actuator/health"]
       interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 60s
     environment:
       - EUREKA_URL=http://discovery-service:8761/eureka/
       - CONFIG_EV=http://config-service:9999
@@ -85,6 +97,9 @@ services:
     healthcheck:
       test: ["CMD","curl","-f","http://localhost:8082/actuator/health"]
       interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 60s
     environment:
       - EUREKA_URL=http://discovery-service:8761/eureka/
       - CONFIG_EV=http://config-service:9999
@@ -107,6 +122,9 @@ services:
     healthcheck:
       test: ["CMD","curl","-f","http://localhost:8087/actuator/health"]
       interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 60s
     environment:
       - EUREKA_URL=http://discovery-service:8761/eureka/
       - CONFIG_EV=http://config-service:9999
@@ -131,6 +149,9 @@ services:
     healthcheck:
       test: ["CMD","curl","-f","http://localhost:8088/actuator/health"]
       interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 60s
     environment:
       - EUREKA_URL=http://discovery-service:8761/eureka/
       - CONFIG_EV=http://config-service:9999
@@ -171,22 +192,3 @@ services:
       - '4200:80'
     expose:
       - '80'
-
-  prometheus:
-    image: prom/prometheus:latest
-    container_name: prometheus
-    ports:
-      - "9091:9090"
-    volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
-    depends_on:
-      - patient-service
-      - analytics-service
-
-  grafana:
-    image: grafana/grafana:latest
-    container_name: grafana
-    ports:
-      - "3000:3000"
-    depends_on:
-      - prometheus
