@@ -215,7 +215,7 @@ pipeline {
         }
 
         stage('Deploy') {
-             when {
+            when {
                 anyOf {
                     changeset "patient-service/**"
                     changeset "auth-service/**"
