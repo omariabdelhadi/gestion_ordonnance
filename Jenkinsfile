@@ -7,7 +7,7 @@ pipeline {
 
     stages {
         stage('Patient Service') {
-            when { changeset "patient-service/**" }
+            //when { changeset "patient-service/**" }
             steps {
                 script {
                     def img = "${DOCKER_REGISTRY}/patient-service"
@@ -28,7 +28,7 @@ pipeline {
         }
 
         stage('Auth Service') {
-            when { changeset "auth-service/**" }
+            //when { changeset "auth-service/**" }
             steps {
                 script {
                     def img = "${DOCKER_REGISTRY}/auth-service"
@@ -49,7 +49,7 @@ pipeline {
         }
 
         stage('Medicament Service') {
-            when { changeset "medicament-service/**" }
+            //when { changeset "medicament-service/**" }
             steps {
                 script {
                     def img = "${DOCKER_REGISTRY}/medicament-service"
@@ -70,7 +70,7 @@ pipeline {
         }
 
         stage('Ordonnance Service') {
-            when { changeset "ordonnance-service/**" }
+            //when { changeset "ordonnance-service/**" }
             steps {
                 script {
                     def img = "${DOCKER_REGISTRY}/ordonnance-service"
@@ -91,7 +91,7 @@ pipeline {
         }
 
         stage('Ordonnance Bot') {
-            when { changeset "ordonnance-bot/**" }
+            //when { changeset "ordonnance-bot/**" }
             steps {
                 script {
                     def img = "${DOCKER_REGISTRY}/ordonnance-bot"
@@ -112,7 +112,7 @@ pipeline {
         }
 
         stage('Config Service') {
-            when { changeset "config-service/**" }
+            //when { changeset "config-service/**" }
             steps {
                 script {
                     def img = "${DOCKER_REGISTRY}/config-service"
@@ -133,7 +133,7 @@ pipeline {
         }
 
         stage('Discovery Server') {
-            when { changeset "discovery-server/**" }
+            //when { changeset "discovery-server/**" }
             steps {
                 script {
                     def img = "${DOCKER_REGISTRY}/discovery-server"
@@ -154,7 +154,7 @@ pipeline {
         }
 
         stage('Gateway Server') {
-            when { changeset "gateway-server/**" }
+            //when { changeset "gateway-server/**" }
             steps {
                 script {
                     def img = "${DOCKER_REGISTRY}/gateway-server"
@@ -175,7 +175,7 @@ pipeline {
         }
 
         stage('Analytics Service') {
-            when { changeset "analytics-service/**" }
+            //when { changeset "analytics-service/**" }
             steps {
                 script {
                     def img = "${DOCKER_REGISTRY}/analytics-service"
@@ -196,7 +196,7 @@ pipeline {
         }
 
         stage('Angular App') {
-            when { changeset "projet-angulare/**" }
+            //when { changeset "projet-angulare/**" }
             steps {
                 script {
                     def img = "${DOCKER_REGISTRY}/projet-angulare"
@@ -215,20 +215,20 @@ pipeline {
         }
 
         stage('Deploy') {
-            when {
+            /* when {
                 anyOf {
-                    changeset "patient-service/**"
-                    changeset "auth-service/**"
-                    changeset "medicament-service/**"
-                    changeset "ordonnance-service/**"
-                    changeset "ordonnance-bot/**"
-                    changeset "config-service/**"
-                    changeset "discovery-server/**"
-                    changeset "gateway-server/**"
-                    changeset "analytics-service/**"
-                    changeset "projet-angulare/**"
+                    changeset "patient-service *//**"
+                    changeset "auth-service *//**"
+                    changeset "medicament-service *//**"
+                    changeset "ordonnance-service *//**"
+                    changeset "ordonnance-bot *//**"
+                    changeset "config-service *//**"
+                    changeset "discovery-server *//**"
+                    changeset "gateway-server *//**"
+                    changeset "analytics-service *//**"
+                    changeset "projet-angulare *//**"
                 }
-            }
+            } */
             steps {
                 sh 'docker compose down --remove-orphans || true'
                 sh 'docker compose pull'
