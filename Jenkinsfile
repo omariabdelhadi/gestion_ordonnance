@@ -8,7 +8,7 @@ pipeline {
     environment {
         DOCKER_REGISTRY = "abd1230"
     }
-
+    // awdiii
     stages {
         stage('Patient Service') {
             // when { changeset "patient-service/**" }
