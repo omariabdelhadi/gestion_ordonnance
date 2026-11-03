@@ -75,6 +75,7 @@
       environment:
         - EUREKA_URL=http://discovery-service:8761/eureka/
         - CONFIG_EV=http://config-service:9999
+        - JWT_SECRET=${JWT_SECRET:-oaqlezeDkveloppament2026ordonnanceMw}
       depends_on:
         gateway-server:
           condition: service_healthy
@@ -97,6 +98,7 @@
         - EUREKA_URL=http://discovery-service:8761/eureka/
         - CONFIG_EV=http://config-service:9999
         - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+        - JWT_SECRET=${JWT_SECRET:-oaqlezeDkveloppament2026ordonnanceMw}
       depends_on:
         gateway-server:
           condition: service_healthy
@@ -121,6 +123,7 @@
         - EUREKA_URL=http://discovery-service:8761/eureka/
         - CONFIG_EV=http://config-service:9999
         - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+        - JWT_SECRET=${JWT_SECRET:-oaqlezeDkveloppament2026ordonnanceMw}
       depends_on:
         patient-service:
           condition: service_healthy
@@ -191,6 +194,7 @@
         - ORDONNANCE_URL=http://ordonnance-service:8087/mcp
         - PATIENT_URL=http://patient-service:8081/mcp
         - MEDICAMENT_URL=http://medicament-service:8082/mcp
+        - JWT_SECRET=${JWT_SECRET:-oaqlezeDkveloppament2026ordonnanceMw}
       depends_on:
         gateway-server:
           condition: service_healthy
