@@ -18,6 +18,7 @@ import java.nio.charset.StandardCharsets;
 @Configuration
 public class SecurityConfig {
 
+    // awdii
     @Value("${jwt.secret}")
     private String secret;
 
