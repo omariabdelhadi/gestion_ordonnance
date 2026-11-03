@@ -11,7 +11,7 @@ public class McpClientConfig {
     public McpSyncHttpClientRequestCustomizer authCustomizer() {
         return (requestBuilder, method, uri, body, context) -> {
             // Ajoute le token d'authentification à chaque requête MCP
-            requestBuilder.header("Authorization", "Bearer B4WYJvSENCjkqKzGHLpdDRTs5QfmlIFg1A6PreonMcx798Vb");
+            requestBuilder.header("Authorization", "Bearer TOKEN_ICI");
         };
     }
 }
