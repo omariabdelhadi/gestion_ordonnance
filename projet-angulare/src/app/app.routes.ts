@@ -10,6 +10,7 @@ import {Inscription} from './inscription/inscription';
 import {authGuard} from './guards/auth-guard';
 
 export const routes: Routes = [
+  { path: "", redirectTo: "login", pathMatch: "full" },
   {path:"login",component:Login},
   {path:"inscription",component:Inscription},
   {path :"patients",component:Patients,canActivate:[authGuard]},
