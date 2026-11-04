@@ -1,0 +1,30 @@
+<div class="inscription-container">
+  <h2>Inscription</h2>
+
+  <form [formGroup]="inscriptionForm" (ngSubmit)="onSubmit()">
+
+    <div>
+      <label for="username">Nom d'utilisateur</label>
+      <input id="username" type="text" formControlName="username" />
+      <small *ngIf="inscriptionForm.get('username')?.touched && inscriptionForm.get('username')?.invalid">
+        Le nom d'utilisateur est obligatoire
+      </small>
+    </div>
+
+    <div>
+      <label for="password">Mot de passe</label>
+      <input id="password" type="password" formControlName="password" />
+      <small *ngIf="inscriptionForm.get('password')?.touched && inscriptionForm.get('password')?.invalid">
+        Le mot de passe est obligatoire (6 caractères minimum)
+      </small>
+    </div>
+
+    <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+    <p *ngIf="successMessage" class="success">{{ successMessage }}</p>
+
+    <button type="submit">S'inscrire</button>
+  </form>
+  <li class="nav-item">
+    <a class="nav-link" routerLink="/login">login</a>
+  </li>
+</div>
