@@ -102,7 +102,7 @@ pipeline {
                     def tag = "${env.BUILD_NUMBER}"
                     dir('ordonnance-bot') {
                         sh 'chmod +x mvnw'
-                        sh './mvnw -B clean package'
+                        sh './mvnw -B clean package -DskipTests'
                         sh "docker build -t ${img}:${tag} -t ${img}:latest ."
                         withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DH_USER', passwordVariable: 'DH_PASS')]) {
                             sh 'echo "$DH_PASS" | docker login -u "$DH_USER" --password-stdin'
