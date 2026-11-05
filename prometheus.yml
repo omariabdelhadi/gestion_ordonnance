@@ -5,39 +5,39 @@ scrape_configs:
   - job_name: 'patient-service'
     metrics_path: '/actuator/prometheus'
     static_configs:
-      - targets: ['patient-service:8081']
+      - targets: ['host.docker.internal:8081']
 
   - job_name: 'medicament-service'
     metrics_path: '/actuator/prometheus'
     static_configs:
-      - targets: ['medicament-service:8082']
+      - targets: ['host.docker.internal:8082']
 
   - job_name: 'ordonnance-service'
     metrics_path: '/actuator/prometheus'
     static_configs:
-      - targets: ['ordonnance-service:8087']
+      - targets: ['host.docker.internal:8087']
 
   - job_name: 'analytics-service'
     metrics_path: '/actuator/prometheus'
     static_configs:
-      - targets: ['analytics-service:8088']
+      - targets: ['host.docker.internal:8088']
 
   - job_name: 'ordonnance-bot'
     metrics_path: '/actuator/prometheus'
     static_configs:
-      - targets: ['ordonnance-bot:8889']
+      - targets: ['host.docker.internal:8889']
 
   - job_name: 'gateway-server'
     metrics_path: '/actuator/prometheus'
     static_configs:
-      - targets: ['gateway-server:8886']
+      - targets: ['host.docker.internal:8886']
 
   - job_name: 'config-service'
     metrics_path: '/actuator/prometheus'
     static_configs:
-      - targets: ['config-service:9999']
+      - targets: ['host.docker.internal:9999']
 
   - job_name: 'discovery-server'
     metrics_path: '/actuator/prometheus'
     static_configs:
-      - targets: ['discovery-service:8761']
+      - targets: ['host.docker.internal:8761']

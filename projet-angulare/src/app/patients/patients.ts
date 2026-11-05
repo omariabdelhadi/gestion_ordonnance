@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {CommonModule} from '@angular/common';
 import {Router} from '@angular/router';
 import {OrdonnanceS} from '../services/OrdonnanceS';
+import {PatientS} from '../services/patient-s';
 
 
 @Component({
@@ -15,10 +16,10 @@ import {OrdonnanceS} from '../services/OrdonnanceS';
 export class Patients implements OnInit{
 
   patientsA:any
-  constructor(private http:HttpClient,private cd:ChangeDetectorRef,private router:Router) {
+  constructor(private ps:PatientS,private cd:ChangeDetectorRef,private router:Router) {
   }
   ngOnInit() {
-    this.http.get<any>("http://localhost:8886/PATIENT-SERVICE/patients")
+    this.ps.getAllPatient()
       .subscribe({
         next:data=>{
           this.patientsA=data._embedded.patients;

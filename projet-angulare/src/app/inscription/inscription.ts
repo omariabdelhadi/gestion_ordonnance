@@ -40,7 +40,6 @@ export class Inscription implements OnInit {
       next: () => {
         this.errorMessage = '';
         this.successMessage = 'Inscription réussie, redirection...';
-        setTimeout(() => this.router.navigate(['/login']), 1000);
       },
       error: () => {
         this.successMessage = '';

@@ -1,15 +1,11 @@
-spring:
-  cloud:
-    gateway:
-      server:
-        webflux:
-          globalcors:
-            cors-configurations:
-              '[/**]':
-                allowedOrigins: "http://localhost:4200"
-                allowedHeaders: "*"
-                allowedMethods:
-                  - GET
-                  - POST
-                  - PUT
-                  - DELETE
+#spring:
+#  cloud:
+#    gateway:
+#      routes:
+#        - id: auth-service
+#          uri: lb://AUTH-SERVICE
+#          predicates:
+#            - Path=/AUTH-SERVICE/**
+#          filters:
+#            - StripPrefix=1
+#            -

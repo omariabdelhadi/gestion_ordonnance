@@ -1,6 +1,7 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {CommonModule} from '@angular/common';
+import {MedicamentS} from '../services/medicament-s';
 
 @Component({
   selector: 'app-medicaments',
@@ -12,10 +13,10 @@ import {CommonModule} from '@angular/common';
 export class Medicaments implements OnInit{
   medicamentsA:any
 
-  constructor(private http:HttpClient,private cd:ChangeDetectorRef) {
+  constructor(private meds:MedicamentS,private cd:ChangeDetectorRef) {
   }
   ngOnInit() {
-    this.http.get<any>("http://localhost:8886/MEDICAMENT-SERVICE/medicaments").subscribe({
+    this.meds.getMedicaments().subscribe({
       next : data=>{
         this.medicamentsA=data._embedded.medicaments;
         this.cd.detectChanges()

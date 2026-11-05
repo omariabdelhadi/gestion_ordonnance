@@ -1,6 +1,7 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
+import {Ordbot} from '../services/ordbot';
 
 @Component({
   selector: 'app-ordonnances-bot',
@@ -12,12 +13,11 @@ import {FormsModule} from '@angular/forms';
 export class OrdonnancesBot implements OnInit{
   humanMessage:any;
   AiReposne:any;
-  constructor(private Http:HttpClient, private cdr:ChangeDetectorRef) {}
+  constructor(private ordS:Ordbot, private cdr:ChangeDetectorRef) {}
   ngOnInit() {}
 
   sendMessage(){
-    this.Http.get("http://localhost:8886/ORDONNANCE-BOT/chat",
-      { params: { query: this.humanMessage }, responseType: 'text' }).subscribe({
+    this.ordS.chatbotMessage(this.humanMessage).subscribe({
       next:data=>{
         this.AiReposne=data;
         this.cdr.detectChanges();

@@ -1,18 +1,26 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {Patient} from '../model/Patient.model';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Patient } from '../model/Patient.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PatientS {
-  constructor(private Http:HttpClient) {}
+  private baseUrl = "http://localhost:8886/PATIENT-SERVICE";
 
-  public getAllPatient():Observable<Array<Patient>>{
-    return this.Http.get<Array<Patient>>("http://localhost:8081/patients")
-  }
-  public AddPatient(nouvellePatient:Patient):Observable<Patient>{
-    return this.Http.post<Patient>("http://localhost:8081/AddPatient",nouvellePatient)
+  constructor(private http: HttpClient) {}
+
+  public getAllPatient(): Observable<any> {
+    // On récupère le token directement
+    const token = localStorage.getItem('token');
+
+    // On crée les headers
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + token
+    });
+
+    // On envoie la requête avec les headers
+    return this.http.get<any>(`${this.baseUrl}/patients`, { headers: headers });
   }
 }

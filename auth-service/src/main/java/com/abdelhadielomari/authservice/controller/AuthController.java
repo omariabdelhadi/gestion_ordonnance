@@ -50,7 +50,7 @@ public class AuthController {
         AppUser newUser=new AppUser();
         newUser.setPassword(passwordEncoder.encode(request.password()));
         newUser.setUsername(request.username());
-        newUser.getRoles().add("ROLE_MEDECIN");
+        newUser.getRoles().add("MEDECIN");
         appUserRepository.save(newUser);
         return ResponseEntity.ok("l'inscription fait avec succée");
     }

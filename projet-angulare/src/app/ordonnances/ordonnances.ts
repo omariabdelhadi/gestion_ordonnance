@@ -2,6 +2,8 @@ import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {CommonModule} from '@angular/common';
 import {ActivatedRoute, Router} from '@angular/router';
+import {OrdonnanceS} from '../services/OrdonnanceS';
+import {Ordonnance} from '../model/Ordonnance.model';
 
 
 @Component({
@@ -14,11 +16,11 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrl: './ordonnances.css',
 })
 export class Ordonnances implements OnInit {
-  ordonnancesA:any;
-  constructor(private Http:HttpClient,private cd:ChangeDetectorRef,private router:Router) {
+  ordonnancesA?:Ordonnance;
+  constructor(private ordS:OrdonnanceS,private cd:ChangeDetectorRef,private router:Router) {
   }
   ngOnInit() {
-    this.Http.get<any>("http://localhost:8886/ORDONNANCE-SERVICE/ordonnances").subscribe({
+    this.ordS.getAllOrdonnances().subscribe({
       next:data=>{
         this.ordonnancesA=data._embedded.ordonnances;
         this.cd.detectChanges()

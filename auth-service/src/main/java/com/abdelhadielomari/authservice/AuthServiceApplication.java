@@ -18,12 +18,6 @@ public class AuthServiceApplication {
         SpringApplication.run(AuthServiceApplication.class, args);
     }
 
-    @Bean
-    CommandLineRunner init(AppUserRepository repo, PasswordEncoder encoder) {
-        return args -> {
-            repo.save(new AppUser(null, "admin", encoder.encode("1234"), new HashSet<>(Set.of("ADMIN", "MEDECIN"))));
-            repo.save(new AppUser(null, "medecin", encoder.encode("1234"), new HashSet<>(Set.of("MEDECIN"))));
-        };
-    }
+
 
 }

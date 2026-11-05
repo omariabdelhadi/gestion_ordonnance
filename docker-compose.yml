@@ -195,6 +195,7 @@
         - PATIENT_URL=http://patient-service:8081/mcp
         - MEDICAMENT_URL=http://medicament-service:8082/mcp
         - ANALYTICS_URL=http://analytics-service:8088/mcp
+        - OPENAI_API_KEY:${OPENAI_API_KEY}
         - JWT_SECRET=${JWT_SECRET:-oaqlezeDkveloppament2026ordonnanceMw}
       depends_on:
         gateway-server:
