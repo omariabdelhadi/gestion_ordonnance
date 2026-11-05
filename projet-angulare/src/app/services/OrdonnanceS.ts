@@ -27,14 +27,14 @@ export class OrdonnanceS {
     return this.Http.get<Ordonnance>("http://localhost:8886/ORDONNANCE-SERVICE/ordonnances/"+id,{ headers: headers });
   }
 
-  public getAllOrdonnances():Observable<Ordonnance>{
+  public getAllOrdonnances():Observable<any>{
 
     const token=localStorage.getItem('token')
     const headers=new HttpHeaders({
       'Authorization': 'Bearer ' + token
     })
 
-    return this.Http.get<Ordonnance>("http://localhost:8886/ORDONNANCE-SERVICE/ordonnances",{ headers: headers })
+    return this.Http.get<any>("http://localhost:8886/ORDONNANCE-SERVICE/ordonnances",{ headers: headers })
   }
 
 

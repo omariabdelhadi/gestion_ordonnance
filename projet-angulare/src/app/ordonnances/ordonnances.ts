@@ -16,7 +16,7 @@ import {Ordonnance} from '../model/Ordonnance.model';
   styleUrl: './ordonnances.css',
 })
 export class Ordonnances implements OnInit {
-  ordonnancesA?:Ordonnance;
+  ordonnancesA: any;
   constructor(private ordS:OrdonnanceS,private cd:ChangeDetectorRef,private router:Router) {
   }
   ngOnInit() {
