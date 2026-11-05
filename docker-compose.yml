@@ -75,7 +75,7 @@
       environment:
         - EUREKA_URL=http://discovery-service:8761/eureka/
         - CONFIG_EV=http://config-service:9999
-        - JWT_SECRET=${JWT_SECRET:-oaqlezeDkveloppament2026ordonnanceMw}
+        - JWT_SECRET=${JWT_SECRET}
       depends_on:
         gateway-server:
           condition: service_healthy
@@ -98,7 +98,7 @@
         - EUREKA_URL=http://discovery-service:8761/eureka/
         - CONFIG_EV=http://config-service:9999
         - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
-        - JWT_SECRET=${JWT_SECRET:-oaqlezeDkveloppament2026ordonnanceMw}
+        - JWT_SECRET=${JWT_SECRET}
       depends_on:
         gateway-server:
           condition: service_healthy
@@ -123,7 +123,7 @@
         - EUREKA_URL=http://discovery-service:8761/eureka/
         - CONFIG_EV=http://config-service:9999
         - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
-        - JWT_SECRET=${JWT_SECRET:-oaqlezeDkveloppament2026ordonnanceMw}
+        - JWT_SECRET=${JWT_SECRET}
       depends_on:
         patient-service:
           condition: service_healthy
@@ -150,7 +150,7 @@
         - EUREKA_URL=http://discovery-service:8761/eureka/
         - CONFIG_EV=http://config-service:9999
         - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
-        - JWT_SECRET=${JWT_SECRET:-oaqlezeDkveloppament2026ordonnanceMw}
+        - JWT_SECRET=${JWT_SECRET}
       depends_on:
         config-service:
           condition: service_healthy
@@ -174,7 +174,7 @@
       environment:
         - EUREKA_URL=http://discovery-service:8761/eureka/
         - CONFIG_EV=http://config-service:9999
-        - JWT_SECRET=${JWT_SECRET:-oaqlezeDkveloppament2026ordonnanceMw}
+        - JWT_SECRET=${JWT_SECRET}
       depends_on:
         config-service:
           condition: service_healthy
@@ -195,8 +195,8 @@
         - PATIENT_URL=http://patient-service:8081/mcp
         - MEDICAMENT_URL=http://medicament-service:8082/mcp
         - ANALYTICS_URL=http://analytics-service:8088/mcp
-        - OPENAI_API_KEY:${OPENAI_API_KEY}
-        - JWT_SECRET=${JWT_SECRET:-oaqlezeDkveloppament2026ordonnanceMw}
+        - OPENAI_API_KEY=${OPENAI_API_KEY}
+        - JWT_SECRET=${JWT_SECRET}
       depends_on:
         gateway-server:
           condition: service_healthy

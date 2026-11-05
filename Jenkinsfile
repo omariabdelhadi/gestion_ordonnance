@@ -7,6 +7,8 @@ pipeline {
 
     environment {
         DOCKER_REGISTRY = "abd1230"
+        OPENAI_API_KEY = credentials('openrouter-api-key')
+        JWT_SECRET = credentials('jwt-secret')
     }
 
     stages {
