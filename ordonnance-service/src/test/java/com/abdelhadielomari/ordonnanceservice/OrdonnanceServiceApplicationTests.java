@@ -147,7 +147,7 @@ class OrdonnanceServiceApplicationTests {
         Long PatientId=1L;
         Long MedicamentId=2L;
         Long MedicamentItemId=3L;
-        int quantiterdemander=15;
+        int quantiterdemander=5;
         int Stock=10;
 
         Medicament medicament=new Medicament();

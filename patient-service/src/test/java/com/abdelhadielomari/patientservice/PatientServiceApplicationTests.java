@@ -9,6 +9,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import static org.mockito.Mockito.*;
@@ -35,5 +37,20 @@ class PatientServiceApplicationTests {
         assertNotNull(resultat);
         assertEquals("Abdelhadi",resultat.getNom());
         verify(patientRepository,times(1)).save(patient);
+    }
+    @Test
+    void testgetPatient(){
+        Patient patient= new Patient();
+        patient.setId(1L);
+        patient.setNom("ayman");
+
+        when(patientRepository.findById(1L)).thenReturn(Optional.of(patient));
+
+        Patient resultat=patientService.getPatient(1L);
+
+        assertNotNull(resultat);
+        assertEquals("ayman",resultat.getNom());
+
+        verify(patientRepository,times(1)).findById(any());
     }
 }

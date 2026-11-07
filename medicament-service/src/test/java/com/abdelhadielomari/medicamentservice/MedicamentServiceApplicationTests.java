@@ -50,7 +50,7 @@ class MedicamentServiceApplicationTests {
         when(medicamentRepository.findById(1L)).thenReturn(Optional.of(medicament));
         Medicament medicament1=medicamentService.getMedicament(1L);
         assertNotNull(medicament1);
-        assertEquals("m1",medicament.getNom());
+        assertEquals("m1",medicament1.getNom());
         verify(medicamentRepository,times(1)).findById(1L);
     }
 
@@ -58,7 +58,7 @@ class MedicamentServiceApplicationTests {
     void get_Medicament_not_existent(){
         when(medicamentRepository.findById(99L)).thenReturn(Optional.empty());
         Medicament medicament=medicamentService.getMedicament(99L);
-        assertNotNull(medicament);
+        assertNull(medicament);
         verify(medicamentRepository,times(1)).findById(99L);
     }
 
