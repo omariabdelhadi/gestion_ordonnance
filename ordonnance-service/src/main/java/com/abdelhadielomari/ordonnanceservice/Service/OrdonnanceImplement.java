@@ -3,6 +3,7 @@ package com.abdelhadielomari.ordonnanceservice.Service;
 import com.abdelhadielomari.ordonnanceservice.Exception.StockInsuffisantException;
 import com.abdelhadielomari.ordonnanceservice.entities.MedicamentItem;
 import com.abdelhadielomari.ordonnanceservice.entities.Ordonnance;
+import com.abdelhadielomari.ordonnanceservice.events.OrdonnanceEventPublisher;
 import com.abdelhadielomari.ordonnanceservice.feign.MedicamentRestClient;
 import com.abdelhadielomari.ordonnanceservice.feign.PatientRestClient;
 import com.abdelhadielomari.ordonnanceservice.models.Medicament;
@@ -28,21 +29,32 @@ public class OrdonnanceImplement implements OrdonnanceService{
     private MedicamentItemRepository medicamentItemRepository;
     @Autowired
     private OrdonnanceRepository ordonnanceRepository;
+    @Autowired
+    private OrdonnanceEventPublisher eventPublisher;
     @Override
 
     @McpTool(description = "Get the details of an Ordonnance")
     public Ordonnance getOrdonnance(@McpToolParam(description = "the Ordonnance id") Long id) {
+
         Ordonnance ordonnances=ordonnanceRepository.findById(id).orElse(null);
+
         Patient patient=patientRestClient.getPatient(ordonnances.getPatientId());
+
         ordonnances.setPatient(patient);
+
         List<MedicamentItem> medicamentItems=medicamentItemRepository.findByOrdonnanceId(id);
+
         medicamentItems.forEach(m->{
+
             Medicament medicament=medicamentRestClient.getMedicament(m.getMedicamentId());
             m.setMedicament(medicament);
             medicamentItemRepository.save(m);
+
         });
         ordonnances.setMedicamentItems(medicamentItems);
+
         ordonnanceRepository.save(ordonnances);
+
         return ordonnances;
     }
 
@@ -65,6 +77,13 @@ public class OrdonnanceImplement implements OrdonnanceService{
             m.setOrdonnance(ordonnance);
             medicamentItemRepository.save(m);
         });
+
+        try {
+            eventPublisher.publier(ordonnance);
+        } catch (Exception e) {
+            System.err.println("Kafka indisponible : " + e.getMessage());
+        }
+
         return ordonnance;
     }
 }

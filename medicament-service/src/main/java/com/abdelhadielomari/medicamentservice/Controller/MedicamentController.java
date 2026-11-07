@@ -25,4 +25,9 @@ public class MedicamentController {
     public Medicament AddMedicament(@RequestParam Medicament medicament){
         return medicamentService.AddMadicament(medicament);
     }
+    @GetMapping("/medicament/{id}/stock")
+    public int Stock(@PathVariable long id){
+        Medicament medicament=medicamentRepository.findById(id).orElse(null);
+        return medicament.getStock();
+    }
 }

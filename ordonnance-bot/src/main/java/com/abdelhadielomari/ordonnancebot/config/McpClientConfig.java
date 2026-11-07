@@ -1,3 +1,4 @@
+/*
 package com.abdelhadielomari.ordonnancebot.config;
 
 import io.modelcontextprotocol.client.transport.customizer.McpSyncHttpClientRequestCustomizer;
@@ -27,4 +28,4 @@ public class McpClientConfig {
             }
         };
     }
-}
+}*/

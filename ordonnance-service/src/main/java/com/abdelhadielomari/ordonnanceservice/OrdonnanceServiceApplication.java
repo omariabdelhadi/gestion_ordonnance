@@ -23,7 +23,7 @@ public class OrdonnanceServiceApplication {
         SpringApplication.run(OrdonnanceServiceApplication.class, args);
     }
 
-    @Bean
+    //@Bean
     public CommandLineRunner commandLineRunner(OrdonnanceRepository ordonnanceRepository, MedicamentItemRepository medicamentItemRepository){
         return args -> {
             List<Long> medicamentId= List.of(1L,2L);

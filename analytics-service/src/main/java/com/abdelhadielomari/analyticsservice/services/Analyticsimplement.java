@@ -1,6 +1,8 @@
 package com.abdelhadielomari.analyticsservice.services;
 
+import com.abdelhadielomari.analyticsservice.entities.MedicamentConsommation;
 import com.abdelhadielomari.analyticsservice.entities.MedicamentStat;
+import com.abdelhadielomari.analyticsservice.repositories.MedicamentConsommationRepository;
 import com.abdelhadielomari.analyticsservice.repositories.MedicamentStatRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.ai.mcp.annotation.McpTool;
@@ -16,6 +18,9 @@ public class Analyticsimplement implements Analyticsservices {
 
     @Autowired
     private MedicamentStatRepository medicamentStatRepository;
+    @Autowired
+    private MedicamentConsommationRepository medicamentConsommationRepository;
+
 
 
     @McpTool(description="get All the medicament stats")
@@ -26,10 +31,15 @@ public class Analyticsimplement implements Analyticsservices {
 
     @McpTool(description = "get an medicament stat by his id")
     @Override
-    public MedicamentStat getById(@McpToolParam(description = "the id of the medicament stat") Long id) {
+    public MedicamentStat getStatById(@McpToolParam(description = "the id of the medicament stat") Long id) {
         return medicamentStatRepository.findById(id).orElse(null);
     }
 
+    @McpTool(description = "get the Medicament Consomation history")
+    @Override
+    public List<MedicamentConsommation> findByMedicamentConsomationId(@McpToolParam(description = "the id of the medicament") Long medicamentId) {
+        return medicamentConsommationRepository.findByMedicamentId(medicamentId);
+    }
 
 
 }

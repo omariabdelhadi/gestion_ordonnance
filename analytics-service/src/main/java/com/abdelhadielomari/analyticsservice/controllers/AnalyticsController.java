@@ -28,20 +28,25 @@ public class AnalyticsController {
     private final PredictionService predictionService;
 
 
+
     @GetMapping("/medicaments")
     public List<MedicamentStat> stats(){
         return analyticsservices.getAll();
     }
+
     @GetMapping("/medicaments/{id}")
     public MedicamentStat stat(@PathVariable Long id){
-        return analyticsservices.getById(id);
+        return analyticsservices.getStatById(id);
     }
+
     @GetMapping("/medicament/{id}/historique")
     public List<MedicamentConsommation> historiquemedicament(@PathVariable Long id){
-        return medicamentConsommationRepository.findByMedicamentId(id);
+        return analyticsservices.findByMedicamentConsomationId(id);
     }
+
     @GetMapping("/medicament/{id}/predection")
     public double PredectionEpuise(@PathVariable Long id){
        return predictionService.estimerJoursAvantRupture(medicamentRestClient.getStock(id),predictionService.calculerConsommationMoyenne(id));
     }
+
 }

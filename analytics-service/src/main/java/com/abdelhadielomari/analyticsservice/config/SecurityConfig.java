@@ -27,9 +27,10 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(a -> a
-                        .requestMatchers("/actuator/health/**","/mcp/**","/actuator/prometheus").permitAll()
+                        .requestMatchers("/actuator/health/**","/mcp/**","/sse/**","/actuator/prometheus","/h2-console/**").permitAll()
                         .anyRequest().authenticated())
                 .oauth2ResourceServer(o -> o.jwt(Customizer.withDefaults()))
+                .headers(headers -> headers.frameOptions(frame -> frame.disable()))
                 .build();
     }
 

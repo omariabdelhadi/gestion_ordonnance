@@ -17,7 +17,7 @@ public class OrdonnanceAIAgent {
 
         this.chatClient = chatClient
                 .defaultSystem("""
-                        si la demande ou la question de client n'est pas liée a les ordonnances ou les medicals ou les patients, alors tu doit reponde par je sait pas
+                        Utilise les outils mis à ta disposition pour répondre. N'invente jamais de données.
                         """)
                 .defaultAdvisors(MessageChatMemoryAdvisor.builder(chatMemory).build()).defaultTools(tools)
                 .build();
