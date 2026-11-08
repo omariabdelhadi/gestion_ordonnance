@@ -39,6 +39,7 @@ public class AuthController {
 
     public record LoginRequest(String username, String password) {}
     public record InscriptionRequest(String username, String password) {}
+
     @PostMapping("/inscription")
     public ResponseEntity<String> inscription(@RequestBody InscriptionRequest request){
         AppUser user=appUserRepository.findByUsername(request.username).orElse(null);
@@ -59,8 +60,10 @@ public class AuthController {
     public Map<String, String> login(@RequestBody LoginRequest request) {
         Authentication auth;
         try {
+
             auth = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(request.username(), request.password()));
+
         } catch (AuthenticationException e) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Identifiants invalides");
         }
