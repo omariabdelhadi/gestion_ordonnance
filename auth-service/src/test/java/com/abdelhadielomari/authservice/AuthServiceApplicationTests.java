@@ -9,6 +9,7 @@ import com.abdelhadielomari.authservice.security.AppUserDetailsService;
 import com.nimbusds.jwt.JWT;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.junit.jupiter.api.Test;
@@ -40,6 +41,8 @@ class AuthServiceApplicationTests {
     private AuthenticationManager authenticationManager;
     @Mock
     private JwtEncoder jwtEncoder;
+    @Mock
+    private PasswordEncoder passwordEncoder;
 
 
     @InjectMocks
@@ -138,7 +141,7 @@ class AuthServiceApplicationTests {
 
         GrantedAuthority authority=mock(GrantedAuthority.class);
         when(authority.getAuthority()).thenReturn("ROL_MEDCIN");
-        doReturn(List.of(authority)).when(auth.getAuthorities());
+        doReturn(List.of(authority)).when(auth).getAuthorities();
 
 
         when(authenticationManager.authenticate(any())).thenReturn(auth);
