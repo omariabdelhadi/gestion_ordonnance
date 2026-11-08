@@ -36,8 +36,6 @@ class AuthServiceApplicationTests {
     @Mock
     private AppUserRepository repo;
     @Mock
-    private AppUserRepository appUserRepository;
-    @Mock
     private AuthenticationManager authenticationManager;
     @Mock
     private JwtEncoder jwtEncoder;
@@ -101,13 +99,13 @@ class AuthServiceApplicationTests {
 
         AuthController.InscriptionRequest inscriptionRequest=new AuthController.InscriptionRequest(username,password);
 
-        when(appUserRepository.findByUsername(username)).thenReturn(Optional.empty());
+        when(repo.findByUsername(username)).thenReturn(Optional.empty());
 
         ResponseEntity<String> responseEntity=authController.inscription(inscriptionRequest);
 
         assertEquals("l'inscription fait avec succée",responseEntity.getBody());
-        verify(appUserRepository,times(1)).findByUsername(username);
-        verify(appUserRepository,times(1)).save(any());
+        verify(repo,times(1)).findByUsername(username);
+        verify(repo,times(1)).save(any());
     }
     @Test
     void inscription_pas_reussie(){
@@ -120,13 +118,13 @@ class AuthServiceApplicationTests {
 
         AuthController.InscriptionRequest inscriptionRequest=new AuthController.InscriptionRequest(username,password);
 
-        when(appUserRepository.findByUsername(username)).thenReturn(Optional.of(user));
+        when(repo.findByUsername(username)).thenReturn(Optional.of(user));
         ResponseEntity<String> responseEntity=authController.inscription(inscriptionRequest);
 
         assertEquals("cette user est deja exist",responseEntity.getBody());
 
-        verify(appUserRepository,times(1)).findByUsername(username);
-        verify(appUserRepository,never()).save(any());
+        verify(repo,times(1)).findByUsername(username);
+        verify(repo,never()).save(any());
     }
     @Test
     void login_rieussie(){
